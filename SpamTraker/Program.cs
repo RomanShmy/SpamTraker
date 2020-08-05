@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using System.Collections.Generic;
 using System;
 
@@ -14,12 +15,14 @@ namespace SpamTraker
             {
                 Console.WriteLine($"{wordsAndCount.ElementAt(i).Key} - {wordsAndCount.ElementAt(i).Value}");
             }
-            Console.WriteLine("1. Count of dictionary: " + (wordsAndCount.Count == 2 ? "+" : "-"));
-            Console.WriteLine("2. Count of word hello: "  + (wordsAndCount["hello"] == 4 ? "+" : "-"));
-            Console.WriteLine("3. Count of word world: " + (wordsAndCount["world"] == 3 ? "+" : "-"));
+        
             string[] words2 = {};
             Dictionary<string, int> wordsAndCount2 = CountWordFrequency(words2);
-            Console.WriteLine("4. Count of empty dictionary: " + (wordsAndCount2.Count == 0 ? "+" : "-"));
+            
+            Debug.Assert(wordsAndCount.Count == 2, "Count of dictionary must be 2");
+            Debug.Assert(wordsAndCount["hello"] == 4, "Count of word hello must be 4");
+            Debug.Assert(wordsAndCount["world"] == 3, "Count of word world must be 3");
+            Debug.Assert(wordsAndCount2.Count == 0, "Count of empty dictionary must be 0");
         }
 
         public static Dictionary<string, int> CountWordFrequency(string[] words){
