@@ -8,11 +8,15 @@ namespace SpamTraker
     {
         static void Main(string[] args)
         {
-            string[] words = {"hello", "hello", "hello", "World", "world"};
+            string[] words = {"hello", "hello", "World", "hello", "World", "world", "hElLo"};
             Dictionary<string, int> wordsAndCount = CountWordFrequency(words);
+            for (int i = 0; i < wordsAndCount.Count; i++)
+            {
+                Console.WriteLine($"{wordsAndCount.ElementAt(i).Key} - {wordsAndCount.ElementAt(i).Value}");
+            }
             Console.WriteLine("1. Count of dictionary: " + (wordsAndCount.Count == 2 ? "+" : "-"));
-            Console.WriteLine("2. Count of word hello: "  + (wordsAndCount["hello"] == 3 ? "+" : "-"));
-            Console.WriteLine("3. Count of word world: " + (wordsAndCount["world"] == 2 ? "+" : "-"));
+            Console.WriteLine("2. Count of word hello: "  + (wordsAndCount["hello"] == 4 ? "+" : "-"));
+            Console.WriteLine("3. Count of word world: " + (wordsAndCount["world"] == 3 ? "+" : "-"));
             string[] words2 = {};
             Dictionary<string, int> wordsAndCount2 = CountWordFrequency(words2);
             Console.WriteLine("4. Count of empty dictionary: " + (wordsAndCount2.Count == 0 ? "+" : "-"));
@@ -25,17 +29,17 @@ namespace SpamTraker
             foreach (var word in words)
             {
                 string w = word.ToLower();
+
                 if(spam.ContainsKey(w))
                 {
-                    spam[w] = ++count;
+                    spam[w] = spam[w] + 1;
                 }
                 else
                 {
-                    count = 1;
                     spam.Add(w, count);
                 }  
             }
-            
+
             return spam;
         }
 
